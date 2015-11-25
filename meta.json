@@ -4,23 +4,54 @@
 {
     //Required. Inputs the module expects.
     "inputs": [
-        //e.g.
-        /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "owner",
+            "title":"Owner"
+        },
+        {
+          "id": "repo",
+          "title":"Repo"
+        },
+        {
+          "id": "organization",
+          "title":"Organization"
         }
-        */
     ],
     //Required. Outputs the module emits.
     "outputs": [
-      //e.g.
-      /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "id",
+            "title":"ID"
+        },
+        {
+          "id": "owner",
+          "title":"Owner"
+        },
+        {
+          "id": "full_name",
+          "title":"Full Name"
+        },
+        {
+          "id": "description",
+          "title":"Description"
+        },
+        {
+          "id": "html_url",
+          "title":"HTML URL"
+        },
+        {
+          "id": "homepage",
+          "title":"Homepage"
+        },
+        {
+          "id": "default_branch",
+          "title":"Default branch"
+        },
+        {
+          "id": "created_at",
+          "title":"Created at"
         }
-      */
     ],
-    "title": "GitHub Create Fork" /* Required.A display name for the module */
+    /* Required.A display name for the module */
+    "title": "GitHub Create Fork"
 }
