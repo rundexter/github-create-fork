@@ -47,9 +47,9 @@ module.exports = {
         //     password: 'password'
         // });
 
-        github.repos.fork(inputs, function (err, repoInfo) {
+        github.repos.fork(inputs, function (error, repoInfo) {
 
-            err ? this.fail(err) : this.complete(util.pickOutputs(repoInfo, pickOutputs));
+            error ? this.fail(error) : this.complete(util.pickOutputs(repoInfo, pickOutputs));
         }.bind(this));
     }
 };
