@@ -63,8 +63,8 @@ module.exports = _.merge({
              */
             input: {
                 //Replace VAR1 with the name of an expected input, and add more inputs as needed.
-                owner: 'octocat',
-                repo: 'Spoon-Knife'
+                owner: 'ozaretskii',
+                repo: 'dexter-test'
             }
         }
     }

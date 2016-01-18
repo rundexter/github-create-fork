@@ -69,7 +69,7 @@ module.exports = {
         var credentials = dexter.provider('github').credentials(),
             inputs = util.pickInputs(step, pickInputs),
             validateErrors = util.checkValidateErrors(inputs, pickInputs);
-
+        console.log(dexter.provider('github').token);
         // check params.
         if (validateErrors)
             return this.fail(validateErrors);
@@ -78,7 +78,6 @@ module.exports = {
             type: 'oauth',
             token: _.get(credentials, 'access_token')
         });
-        //console.log(inputs);
         github.repos.fork(inputs, function (err, repoInfo) {
 
             err ? this.fail(err) : this.complete(util.pickOutputs(repoInfo, pickOutputs));
