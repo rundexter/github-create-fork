@@ -1,16 +1,23 @@
-var GitHubApi = require("github");
-var _ = require('lodash');
+var _ = require('lodash'),
+    util = require('./util.js'),
+    GitHubApi = require("github"),
+    github = new GitHubApi({ version: '3.0.0' });
 
-var pickResultData = [
-    'id',
-    'owner.login',
-    'full_name',
-    'description',
-    'html_url',
-    'homepage',
-    'default_branch',
-    'created_at'
-];
+var pickInputs = {
+        'owner': { key: 'user', validate: { req: true } },
+        'repo': { key: 'repo', validate: { req: true } },
+        'organization': 'organization'
+    },
+    pickOutputs = {
+        'id': 'id',
+        'owner': 'owner.login',
+        'full_name': 'full_name',
+        'description': 'description',
+        'html_url': 'html_url',
+        'homepage': 'homepage',
+        'default_branch': 'default_branch',
+        'created_at': 'created_at'
+    };
 
 module.exports = {
     /**
@@ -59,23 +66,22 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
+        var credentials = dexter.provider('github').credentials(),
+            inputs = util.pickInputs(step, pickInputs),
+            validateErrors = util.checkValidateErrors(inputs, pickInputs);
 
-        var github = new GitHubApi({
-            // required 
-            version: "3.0.0"
+        // check params.
+        if (validateErrors)
+            return this.fail(validateErrors);
+
+        github.authenticate({
+            type: 'oauth',
+            token: _.get(credentials, 'access_token')
         });
+        //console.log(inputs);
+        github.repos.fork(inputs, function (err, repoInfo) {
 
-        this.gitHubAuthenticate(dexter, github);
-
-        if (!step.input('owner').first() || !step.input('repo').first()) {
-
-            this.fail('[owner, repo, organization] inputs variable need for this module');
-        } else {
-
-            github.repos.fork(_.merge({user: step.input('owner').first()}, _.omit(step.inputs(), ['owner'])), function (err, repoInfo) {
-
-                err ? this.fail(err) : this.complete(this.pickResultData(repoInfo));
-            }.bind(this));
-        }
+            err ? this.fail(err) : this.complete(util.pickOutputs(repoInfo, pickOutputs));
+        }.bind(this));
     }
 };
