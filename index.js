@@ -40,13 +40,6 @@ module.exports = {
             token: _.get(credentials, 'access_token')
         });
 
-        // It work for me
-        // github.authenticate({
-        //     type: 'basic',
-        //     username: 'username',
-        //     password: 'password'
-        // });
-
         github.repos.fork(inputs, function (error, repoInfo) {
 
             error ? this.fail(error) : this.complete(util.pickOutputs(repoInfo, pickOutputs));
