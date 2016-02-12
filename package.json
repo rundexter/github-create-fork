@@ -1,13 +1,17 @@
 {
-  "name": "github-create-fork",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "author": "Alexander",
-  "license": "ISC",
-  "private": true,
-  "dependencies": {
-    "github": "^0.2.4",
-    "lodash": "^3.10.1"
-  }
+   "name": "github-create-fork",
+   "version": "0.0.1",
+   "description": "Create a fork for the authenticated user",
+   "main": "index.js",
+   "author": "Run Dexter, Inc",
+   "license": "MIT",
+   "private": true,
+   "dependencies": {
+      "github": "^0.2.4",
+      "lodash": "^3.10.1"
+   },
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/rundexter/github-create-fork"
+   }
 }
